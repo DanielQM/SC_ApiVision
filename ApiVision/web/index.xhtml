@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Api Vision - Aplication</title>
+    </h:head>
+    <h:body>
+    
+        <h:form id="Formulario">
+            <p:panel id="pnl" header="Api Vision" style="margin-bottom:10px;">
+                <p:panelGrid columns="1">
+                    <p:inputText value="#{controller.dl.nameFile}" />
+                    <p:inputTextarea value="#{controller.dl.responses}" style="width: 1000px"/>
+                    <p:commandButton style="margin:0" id="saveBtn" value="Consultar Api Vision" actionListener="#{controller.apiVision()}" update="Formulario"/>
+                    <p:commandButton style="margin:0"  value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+
+
+    </h:body>
+</html>
+
