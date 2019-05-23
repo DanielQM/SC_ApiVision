@@ -2,32 +2,32 @@ package model;
 
 
 public class model {
-    private String token_acces="ya29.c.El4JB6cOfgkdLBfmyRcleLl1moXPLwJDuZiJxxM6tzDvyItUEzi11JGFVJoAbh8lIw415AYr17rmZr5OrXd1d9E7CP9smy-_mmdEWlXUYJE3-Ptx2V0DodkTTHrKixoY";
-    private String responses;
-    private String nameFile;
+    private String token="ya29.c.El4SBzsM55GyHNNiWwgsid1JW9G-yiQxFZpWNCMc9nH9tHjEvUpfGpfWP0XXWVWPrFb3xrC2EeF9gCV2cVwdzH153zJoqCS2DGX9BWSQ7xwhhfmmjNt23FcdAMULxOmT";
+    private String respuesta;
+    private String nombreArchivo;
 
-    public String getToken_acces() {
-        return token_acces;
+    public String getToken() {
+        return token;
     }
 
-    public void setToken_acces(String token_acces) {
-        this.token_acces = token_acces;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getResponses() {
-        return responses;
+    public String getRespuesta() {
+        return respuesta;
     }
 
-    public void setResponses(String responses) {
-        this.responses = responses;
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
     }
 
-    public String getNameFile() {
-        return nameFile;
+    public String getNombreArchivo() {
+        return nombreArchivo;
     }
 
-    public void setNameFile(String nameFile) {
-        this.nameFile = nameFile;
+    public void setNombreArchivo(String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
     }
     
 }

@@ -16,23 +16,21 @@ import org.json.JSONObject;
 
 public class dao {
 
-    public model consultarapiVision(model dl) throws JSONException, IOException {
+    public model consultarApiVision(model dl) throws JSONException, IOException {
         HttpClient httpClient = new DefaultHttpClient();
-
         try {
-            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyD2LhHdvtTLXH47LQS_tsPiLrIxi-aRdwA");// creamos la conexion con el API
+            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=8ebf66b5e91dffb3e7da418c2ec1160abe48933c");// creamos la conexion con el API
             StringEntity params = new StringEntity("{\n"
                     + "  \"requests\": [\n"
                     + "    {\n"
                     + "      \"image\": {\n"
                     + "        \"source\": {\n"
-                    + "          \"gcsImageUri\": \"gs://danielqm/" + dl.getNameFile() + "\"\n"
+                    + "          \"gcsImageUri\": \"gs://danielqm/" + dl.getNombreArchivo()+ "\"\n"
                     + "        }\n"
                     + "      },\n"
                     + "      \"features\": [\n"
                     + "        {\n"
-                    + "          \"type\":\"DOCUMENT_TEXT_DETECTION\",\n" //Tipo de Api a Utilizar
-                    + "          \"maxResults\":1\n" 
+                    + "          \"type\": \"TEXT_DETECTION\"\n"
                     + "        }\n"
                     + "      ]\n"
                     + "    }\n"
@@ -40,12 +38,12 @@ public class dao {
                     + "}");
 
             request.addHeader("Content-Type", "application/json"); // agrega un nuevo encabezado HTML que le decimos sera un tipo : aplicacion json
-            request.addHeader("Authorization", "Bearer " + dl.getToken_acces());// agrega un nuevo encabezado HTML el cual sera de Autorizacion : Bearer Token y añade el Token
+            request.addHeader("Authorization", "Bearer " + dl.getToken());// agrega un nuevo encabezado HTML el cual sera de Autorizacion : Bearer Token y añade el Token
             request.setEntity(params); // Obtiene la solicitud de recursos
             HttpResponse response = httpClient.execute(request);
             HttpEntity entity = response.getEntity();
             JSONObject json = new JSONObject(EntityUtils.toString(entity));
-            dl.setResponses(json.getJSONArray("responses").getJSONObject(0).getJSONObject("fullTextAnnotation").getString("text"));
+            dl.setRespuesta(json.getJSONArray("responses").getJSONObject(0).getJSONObject("fullTextAnnotation").getString("text"));
         } catch (IOException ex) {
             throw ex;
         }

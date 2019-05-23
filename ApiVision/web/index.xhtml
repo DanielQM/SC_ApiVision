@@ -7,16 +7,15 @@
         <title>Api Vision - Aplication</title>
     </h:head>
     <h:body>
-    
+
         <h:form id="Formulario">
-            <p:panel id="pnl" header="Api Vision" style="margin-bottom:10px;">
-                <p:panelGrid columns="1">
-                    <p:inputText value="#{controller.dl.nameFile}" />
-                    <p:inputTextarea value="#{controller.dl.responses}" style="width: 1000px"/>
-                    <p:commandButton style="margin:0" id="saveBtn" value="Consultar Api Vision" actionListener="#{controller.apiVision()}" update="Formulario"/>
-                    <p:commandButton style="margin:0"  value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
-                </p:panelGrid>
-            </p:panel>
+            <h1>Api Vision</h1>
+            <p:panelGrid columns="1">
+                <p:inputText value="#{controller.mode.nombreArchivo}" style="width: 1000px" placeholder="Nombre del archivo"/>
+                <p:inputTextarea value="#{controller.mode.respuesta}" style="width: 1000px"/>
+                <p:commandButton value="Consultar" actionListener="#{controller.consultarApiVision()}" update="Formulario" style="background-color: skyblue"/>
+                <p:commandButton value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
+            </p:panelGrid>
         </h:form>
 
 

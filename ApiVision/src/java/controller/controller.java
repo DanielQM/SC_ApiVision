@@ -11,29 +11,28 @@ import org.json.JSONException;
 @Named(value = "controller")
 @SessionScoped
 public class controller implements Serializable {
-    
-    model dl = new model();
-    
-    public void limpiar(){
-    dl = new model();
+
+    model mode = new model();
+
+    public void limpiar() {
+        mode = new model();
     }
 
-    public void apiVision() throws IOException, JSONException {
+    public void consultarApiVision() throws IOException, JSONException {
         dao dao;
         try {
             dao = new dao();
-            dao.consultarapiVision(dl);
+            dao.consultarApiVision(mode);
         } catch (IOException | JSONException e) {
             throw e;
         }
     }
 
-    public model getDl() {
-        return dl;
+    public model getMode() {
+        return mode;
     }
 
-    public void setDl(model dl) {
-        this.dl = dl;
+    public void setMode(model mode) {
+        this.mode = mode;
     }
- 
 }
