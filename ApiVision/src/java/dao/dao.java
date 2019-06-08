@@ -19,13 +19,13 @@ public class dao {
     public model consultarApiVision(model dl) throws JSONException, IOException {
         HttpClient httpClient = new DefaultHttpClient();
         try {
-            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=8ebf66b5e91dffb3e7da418c2ec1160abe48933c");// creamos la conexion con el API
+            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBJEYF4YjGlg6Srsf-6Z7VcFCp2w85XQ-I");// creamos la conexion con el API
             StringEntity params = new StringEntity("{\n"
                     + "  \"requests\": [\n"
                     + "    {\n"
                     + "      \"image\": {\n"
                     + "        \"source\": {\n"
-                    + "          \"gcsImageUri\": \"gs://danielqm/" + dl.getNombreArchivo()+ "\"\n"
+                    + "          \"gcsImageUri\": \"gs://segmento-dev/" + dl.getNombreArchivo()+ "\"\n"
                     + "        }\n"
                     + "      },\n"
                     + "      \"features\": [\n"
