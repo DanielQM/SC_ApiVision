@@ -7,18 +7,29 @@
         <title>Api Vision - Aplication</title>
     </h:head>
     <h:body>
+        <p:growl life="1500">
+            <p:autoUpdate/>
+        </p:growl>
 
         <h:form id="Formulario">
-            <h1>Api Vision</h1>
-            <p:panelGrid columns="1">
-                <p:inputText value="#{controller.mode.nombreArchivo}" style="width: 1000px" placeholder="Nombre del archivo"/>
-                <p:inputTextarea value="#{controller.mode.respuesta}" style="width: 1000px"/>
-                <p:commandButton value="Consultar" actionListener="#{controller.consultarApiVision()}" update="Formulario" style="background-color: skyblue"/>
-                <p:commandButton value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
-            </p:panelGrid>
+            <p:tabView>
+                <p:tab title="Consultar">
+                    <h:panelGrid columns="2">
+                        <p:inputText value="#{controller.mode.nombreArchivo}" placeholder="Nombre del archivo"/>
+                        <p:commandButton value="Consultar" actionListener="#{controller.consultarApiVision()}" update="Formulario" style="background-color: skyblue"/>
+                        <p:inputTextarea value="#{controller.mode.respuesta}"  readonly="true"/>
+                        <p:commandButton value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Cargar">
+                    <h:panelGrid columns="2" cellpadding="10">
+                        <p:inputTextarea value="#{controller.mode.rutaImagen}" placeholder="Ruta de imagen" style="width: 1000px"/>
+                        <p:commandButton value="Enviar" actionListener="#{controller.envioStorage()}" update="Formulario"/>
+                        <p:inputText value="#{controller.mode.nombreArchivo}" placeholder="Nombre"/>
+                        <p:commandButton value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
         </h:form>
-
-
     </h:body>
 </html>
-

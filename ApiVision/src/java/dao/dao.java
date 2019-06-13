@@ -16,16 +16,16 @@ import org.json.JSONObject;
 
 public class dao {
 
-    public model consultarApiVision(model dl) throws JSONException, IOException {
+    public model consultarApiVision(model mode) throws JSONException, IOException {
         HttpClient httpClient = new DefaultHttpClient();
         try {
-            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAotA3vBiH8AHzCwiTexZTMItREhkphUEY");// creamos la conexion con el API
+            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDpO3zTods0DNAmDICPgWkmspUZ3AoPggc");// creamos la conexion con el API
             StringEntity params = new StringEntity("{\n"
                     + "  \"requests\": [\n"
                     + "    {\n"
                     + "      \"image\": {\n"
                     + "        \"source\": {\n"
-                    + "          \"gcsImageUri\": \"gs://segmento-dev/" + dl.getNombreArchivo()+ "\"\n"
+                    + "          \"gcsImageUri\": \"gs://danielqm/" + mode.getNombreArchivo()+ "\"\n"
                     + "        }\n"
                     + "      },\n"
                     + "      \"features\": [\n"
@@ -38,15 +38,48 @@ public class dao {
                     + "}");
 
             request.addHeader("Content-Type", "application/json"); // agrega un nuevo encabezado HTML que le decimos sera un tipo : aplicacion json
-            request.addHeader("Authorization", "Bearer " + dl.getToken());// agrega un nuevo encabezado HTML el cual sera de Autorizacion : Bearer Token y añade el Token
+            request.addHeader("Authorization", "Bearer " + mode.getToken());// agrega un nuevo encabezado HTML el cual sera de Autorizacion : Bearer Token y añade el Token
             request.setEntity(params); // Obtiene la solicitud de recursos
             HttpResponse response = httpClient.execute(request);
             HttpEntity entity = response.getEntity();
             JSONObject json = new JSONObject(EntityUtils.toString(entity));
-            dl.setRespuesta(json.getJSONArray("responses").getJSONObject(0).getJSONObject("fullTextAnnotation").getString("text"));
+            mode.setRespuesta(json.getJSONArray("responses").getJSONObject(0).getJSONObject("fullTextAnnotation").getString("text"));
         } catch (IOException ex) {
             throw ex;
         }
-        return dl;
+        return mode;
+    }
+    
+    public void envioStorage(model mode) {
+        try {
+            //Leo fichero
+            String filename =  mode.getRutaImagen();
+
+            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            String lineaTotal = "";
+            String linea = reader.readLine();
+            while (linea != null) {
+                lineaTotal = lineaTotal + linea;
+                linea = reader.readLine();
+            }
+
+            String envio = lineaTotal;
+            System.out.println("TAMAÑO KILOBYTES: " + (lineaTotal.length() / 1024));
+            reader.close();
+            StringEntity params = new StringEntity(envio);
+
+            HttpClient httpClient = new DefaultHttpClient();
+            model dl = new model();
+
+            HttpPost request = new HttpPost("https://www.googleapis.com/upload/storage/v1/b/danielqm/o?uploadType=media&name=" + mode.getNombreArchivo());
+            request.addHeader("Content-Type", "image/jpeg");
+            request.addHeader("Authorization", "Bearer " + mode.getToken());
+            request.setEntity(params);
+            HttpResponse response = httpClient.execute(request);
+            HttpEntity entity = response.getEntity();
+            System.out.println(EntityUtils.toString(entity));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

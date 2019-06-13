@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import model.model;
 import org.json.JSONException;
 
@@ -25,6 +27,18 @@ public class controller implements Serializable {
             dao.consultarApiVision(mode);
         } catch (IOException | JSONException e) {
             throw e;
+        }
+    }
+    
+     public void envioStorage() {
+        dao dao;
+        try {
+            dao = new dao();
+            dao.envioStorage(mode);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Imagen subida satisfactoriamente", null));
+            limpiar();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Error al subir imagen", null));
         }
     }
 
