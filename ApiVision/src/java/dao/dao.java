@@ -19,13 +19,13 @@ public class dao {
     public model consultarApiVision(model mode) throws JSONException, IOException {
         HttpClient httpClient = new DefaultHttpClient();
         try {
-            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDpO3zTods0DNAmDICPgWkmspUZ3AoPggc");// creamos la conexion con el API
+            HttpPost request = new HttpPost("https://vision.googleapis.com/v1/images:annotate?key=AIzaSyBX3BL1JNBGecWxxkF5OZrFeJA8TVbTZsA");// creamos la conexion con el API
             StringEntity params = new StringEntity("{\n"
                     + "  \"requests\": [\n"
                     + "    {\n"
                     + "      \"image\": {\n"
                     + "        \"source\": {\n"
-                    + "          \"gcsImageUri\": \"gs://danielqm/" + mode.getNombreArchivo()+ "\"\n"
+                    + "          \"gcsImageUri\": \"gs://danielqm/" + mode.getNombreArchivo() + "\"\n"
                     + "        }\n"
                     + "      },\n"
                     + "      \"features\": [\n"
@@ -49,11 +49,11 @@ public class dao {
         }
         return mode;
     }
-    
+
     public void envioStorage(model mode) {
         try {
             //Leo fichero
-            String filename =  mode.getRutaImagen();
+            String filename = mode.getRutaImagen();
 
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             String lineaTotal = "";
@@ -71,7 +71,7 @@ public class dao {
             HttpClient httpClient = new DefaultHttpClient();
             model dl = new model();
 
-            HttpPost request = new HttpPost("https://www.googleapis.com/upload/storage/v1/b/danielqm/o?uploadType=media&name=" + mode.getNombreArchivo());
+            HttpPost request = new HttpPost("https://www.googleapis.com/upload/storage/v1/b/danielqm/o?uploadType=media&name=" + mode.getImagen());
             request.addHeader("Content-Type", "image/jpeg");
             request.addHeader("Authorization", "Bearer " + mode.getToken());
             request.setEntity(params);

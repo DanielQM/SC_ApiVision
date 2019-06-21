@@ -22,10 +22,10 @@
                     </h:panelGrid>
                 </p:tab>
                 <p:tab title="Cargar">
-                    <h:panelGrid columns="2" cellpadding="10">
+                    <h:panelGrid columns="2">
                         <p:inputTextarea value="#{controller.mode.rutaImagen}" placeholder="Ruta de imagen" style="width: 1000px"/>
                         <p:commandButton value="Enviar" actionListener="#{controller.envioStorage()}" update="Formulario"/>
-                        <p:inputText value="#{controller.mode.nombreArchivo}" placeholder="Nombre"/>
+                        <p:inputText value="#{controller.mode.imagen}" placeholder="Nombre"/>
                         <p:commandButton value="Limpiar" actionListener="#{controller.limpiar()}" update="Formulario"/>
                     </h:panelGrid>
                 </p:tab>

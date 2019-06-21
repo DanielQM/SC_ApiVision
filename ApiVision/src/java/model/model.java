@@ -2,9 +2,10 @@ package model;
 
 
 public class model {
-    private String token="ya29.c.El4nB8v6D4fFmDJ-GXaf0SCb2BKiLkXgw6LkRhBOAGblyZPIaYe5Yv0wR5HafMcdm1O7G1MTP8Q3lCvNho2CEaL4-4fyXYs6_Vl0cI9EBudeXq9ugnaY4EteQrRTZ5eQ";
+    private String token="ya29.c.El4uBwUl2ftXUSEgzHna7b7ZganNTbQurQXHQtrdub8dGPsRxmU4or49JPDHwJz1wZmWLD1ZQ7rbzgxB107Fj9m0CRedXmJwDC8vsvZ16x715DBg8wYdPYAL2Pz8ZHnf";
     private String respuesta;
     private String nombreArchivo;
+    private String imagen;
     private String rutaImagen;
 
     public String getToken() {
@@ -29,6 +30,14 @@ public class model {
 
     public void setNombreArchivo(String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getRutaImagen() {
